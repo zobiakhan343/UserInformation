@@ -4,7 +4,7 @@ import {
     Button, Form, Modal,
 } from "react-bootstrap";
 
-const UserInformationEdit = ({ show, isClose, id }) => {
+const UserInformationEdit = ({ show, isClose, userData }) => {
     const [form, setForm] = useState({});
 
     const handleForm = e => {
@@ -17,7 +17,7 @@ const UserInformationEdit = ({ show, isClose, id }) => {
 
     const handleSubmitForm = e => {
         e.preventDefault();
-        const request = Axios.patch(`http://localhost:3000/userInformation/${id}`, form );
+        const request = Axios.patch(`http://localhost:3000/userInformation/${userData.id}`, form );
         request.then(response => {
             const informations = response.data;
             setForm(informations);
@@ -42,19 +42,19 @@ const UserInformationEdit = ({ show, isClose, id }) => {
                 <Form style={{marginTop: '20px'}} >
                     <Form.Group controlId="exampleForm.ControlInput1">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control type="text" name="username" onChange={e => handleForm(e)} placeholder="Username" />
+                        <Form.Control type="text" name="username" defaultValue={userData.username} onChange={e => handleForm(e)} placeholder="Username" />
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlInput1">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" name="email" onChange={e => handleForm(e)} placeholder="name@example.com"/>
+                        <Form.Control type="email" name="email" defaultValue={userData.email} onChange={e => handleForm(e)} placeholder="name@example.com"/>
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlInput1">
                         <Form.Label>Address</Form.Label>
-                        <Form.Control type="text" name="address" onChange={e => handleForm(e)} placeholder="Address"/>
+                        <Form.Control type="text" name="address" defaultValue={userData.address} onChange={e => handleForm(e)} placeholder="Address"/>
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlInput1">
                         <Form.Label>Mobile</Form.Label>
-                        <Form.Control type="number" name="mobileNo" onChange={e => handleForm(e)} placeholder="Mobile Number"/>
+                        <Form.Control type="number" name="mobileNo" defaultValue={userData.mobileNo} onChange={e => handleForm(e)} placeholder="Mobile Number"/>
                     </Form.Group>
                 </Form>
             </Modal.Body>
